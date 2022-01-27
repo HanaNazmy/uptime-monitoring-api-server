@@ -1,0 +1,177 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "4.8.2",
+        "title": "Uptime Monitoring API Server",
+        "description": "NodeJS uptime monitoring API server",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Checks",
+            "description": "API for checks in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/check": {
+            "post": {
+                "tags": [
+                    "Checks"
+                ],
+                "summary": "Create a new check",
+                "description": "Create new check in system",
+                "parameters": [
+                    {
+                        "name": "check",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Check"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CheckResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Checks"
+                ],
+                "summary": "Delete an existing check",
+                "parameters": [
+                    {
+                        "name": "check",
+                        "in": "body",
+                        "description": "Check that we want to delete",
+                        "schema": {
+                            "$ref": "#/definitions/CheckToDelete"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CheckResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/check/{name}": {
+            "parameters": [
+                {
+                    "name": "name",
+                    "in": "path",
+                    "required": true,
+                    "description": "Name of check that we want to update",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Checks"
+                ],
+                "summary": "Update URL for an existing check",
+                "parameters": [
+                    {
+                        "name": "check",
+                        "in": "body",
+                        "description": "Check that we want to update",
+                        "schema": {
+                            "$ref": "#/definitions/CheckToUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CheckResponse"
+                        }
+                    }
+                }
+            }
+        }
+        },
+        "definitions": {
+            "Check": {
+                "required": [
+                    "name",
+                    "url",
+                    "protocol",
+                    "ignoreSSL"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "protocol": {
+                        "type": "string"
+                    },
+                    "ignoreSSL": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "CheckResponse": {
+                "required": [
+                    "status"
+                ],
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CheckToDelete": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CheckToUpdate": {
+                "required": [
+                    "url"
+                ],
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }

@@ -1,0 +1,23 @@
+GET http://localhost:5000/login
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZjJlNmNlNjk3YmQ5NGIyNGMwMjU1MSIsInVzZXJuYW1lIjoiaGFuYSIsImlhdCI6MTY0MzMwOTE4M30.Io9Tmcv_D0xJJlIpx3oC9gdADRjsdkEji7HwOiXUWTQ
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+      "username": "hana",
+      "password": "12345678"
+}
+###
+GET http://localhost:5000/register
+
+###
+POST http://localhost:5000/register
+Content-Type: application/json
+
+{
+      "username": "hana",
+      "password": "12345678"
+}
+###
